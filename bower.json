@@ -1,0 +1,23 @@
+{
+  "name": "Chatti",
+  "version": "0.0.0",
+  "homepage": "http://andybaird.github.io/chatti/",
+  "authors": [
+    "Andy Baird <Andy.Baird@icloud.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "backbone": "~1.2.0"
+  }
+}
