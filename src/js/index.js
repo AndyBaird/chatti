@@ -1,10 +1,8 @@
 (function() {
-//function to display user input in output element
-
 
 //master function to listen and parse all inputs
 $('.user-form').on('submit', function parseInputs(e){
-  e.preventDefault();
+  e.preventDefault();  
     var input = $('.user-input').val().split(': ');
     console.log(input[0]);
     	if (input[0] == "gh") {
@@ -16,6 +14,7 @@ $('.user-form').on('submit', function parseInputs(e){
           li.setAttribute('class','list-user');
           ul.appendChild(li);
           $('.list-user').last().text(input);
+          scroll();
           $('.user-input').val(''); 
     };
 });
@@ -27,23 +26,41 @@ function getGitHub (){
     $.getJSON('https://api.github.com/users/' + ghLogin)
       .done(showUser)
       .fail(showError);
-  };
+  }
   
-  function showUser(user) {
-    show('gh-user-template', user);
+function showUser(user) {
+  show('gh-user-template', user);
   }
-
-  function show(template, model) {
+  
+function showError(req, status, err) {
+  err = err || {};
+  err.message = err.message || status;
+  console.log(err);
+  show('gh-error-template', { message: err });
+  }
+//function to append new content to the Ul
+function show(template, model) {
     var fn = _.template($('#' + template).html(), { variable: 'm' });
-    $('.output-list').html(fn(model));
+    $('.output-list').append(fn(model));
+    scroll();
   } 
-  function showError(req, status, err) {
-    err = err || {};
-    err.message = err.message || status;
-    console.log(err);
-    show('gh-error-template', { message: err });
-  }
-})();
+//function to scroll viewport to bottom
+  function scroll (){
+    var objScroll = document.querySelector('.output-list');
+    var targetOffset = objScroll.offsetHeight;
+      console.log(targetOffset);
+      objScroll.scrollTop = objScroll.scrollHeight + targetOffset;
+  };
 
-//need to have one central parsing function that listens for the input
-//and calls other functions based on the listener @gh, @weather etc.
+//function getWeather(zipCode) {
+//  $.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial')
+//    .done(function (data) {
+//      console.log(data);
+//    	$('.active-title').html("Current Weather");
+//    	$('.active-content').html("In " + data.name + " it is " + data.main.temp + " degrees outside and the conditions are: "
+//      + data.weather[0].description);
+//  });
+//}  
+  
+  
+})();
