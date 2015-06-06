@@ -4,12 +4,22 @@
 $('.user-form').on('submit', function parseInputs(e){
   e.preventDefault();  
     var input = $('.user-input').val().split(': ');
-    console.log(input[0]);
+    console.log(input);
+//    var input = [];
+//    for (var i = 0; i < inputAll.length; i++) {
+//      console.log(inputAll[i].val());
+//      inputAll[i].value.trim().push(input);
+//
+//    }
+    
     	if (input[0] == "gh") {
         getGitHub();
       }
       if (input[0] == "weather"){
         getWeather();
+      }
+      if (input[0] == 'gif'){
+        getGif();
       }
       if (1 == 1) {
         var ul = document.querySelector('.output-list');
@@ -27,8 +37,10 @@ $('.user-form').on('submit', function parseInputs(e){
 //function to append new content to the Ul
 function show(template, model) {
     var fn = _.template($('#' + template).html(), { variable: 'm' });
+            console.log(model);
     $('.output-list').append(fn(model));
-    scroll();
+        setTimeout(scroll,200);
+
   } 
 //function to scroll viewport to bottom
   function scroll (){
@@ -65,14 +77,28 @@ function showError(req, status, err) {
 
 function getWeather() {
   var input = $('.user-input').val().split(': ');
-  var zipCode = input[1]; 
-  $.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial')
+  var location = input[1]; 
+  $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial')
     .done(showWeather);
+    console.log($.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial'));
   }
   
-function showWeather(zipCode) {
-  show('weather-template', zipCode);
+function showWeather(location) {
+  show('weather-template', location);
   $('.user-input').val(''); 
   }
+
+//Gif Api
+function getGif() {
+  var input = $('.user-input').val().split(': ');
+  var searchKeyword = input[1]; 
+  $.getJSON('http://api.giphy.com/v1/gifs/search?q=' + searchKeyword + '&api_key=dc6zaTOxFJmzC')
+    .done(showGif);
+
+  }
   
+function showGif(image) {
+  show('gify-template', image);
+  $('.user-input').val(''); 
+  }
 })();

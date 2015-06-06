@@ -41,13 +41,28 @@
           
          <script id="weather-template" type="text/html">
           <li class = "list-weather">
-<!--              <img class="weather-icon" src="<%- m.weather[0].icon %>" alt="icon">-->
-            <span class="weather-desc">
-              <%- m.name + ", " + m.main.temp + " degrees, & " + m.weather[0].description %>               
-            </span>
+            <div class ="weather-icon-container">
+              <img class="weather-icon" src=<%- "http://openweathermap.org/img/w/" + m.weather[0].icon + ".png" %>
+              </img>
+            </div>
+  
+            <div class="weather-desc-container">
+              <span class="weather-desc">
+                In <%- m.name + " it is currently " + m.main.temp + "°F and the conditions are: " + m.weather[0].description %>               
+              </span>
+            </div>
           </li>
-        </script>
-            
+          </script>
+          
+          <script id="gify-template" type="text/html">
+            <li class = "list-gify">
+
+              <img class = "gif-image" src=<%- m.data[_.random(0,25)].images.downsized.url %>
+                
+              </img> 
+            </li>
+          </script>
+              
       <script src="js/vendor.js"></script>
       <script src="js/app.js"></script>
       <script src="js/index.js"></script>
