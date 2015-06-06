@@ -52,20 +52,22 @@ body {
   height: 100vh; }
 
 .output-container {
-  height: 90%;
+  height: 100%;
   background: white; }
 
 .output-list {
+  max-height: 100vh;
   overflow: auto;
   position: fixed;
   bottom: 0;
-  margin-bottom: 5em;
+  margin-bottom: 4.5em;
   width: 100%; }
 
 li {
   padding: 0.5em;
   font-size: 1.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
   margin-right: 0.8em;
   margin-left: 3.2em;
   background: #E8E8E8;
@@ -98,3 +100,17 @@ li {
   transform: translateX(-50%);
   border-radius: 0.4em;
   font-size: 1em; }
+
+.list-gitHub {
+  position: relative;
+  text-align: left;
+  height: 200px; }
+
+.gitHub-user-name .gitHub-user-stats {
+  float: right;
+  text-align: right;
+  vertical-align: top; }
+
+.gitHub-avatar {
+  max-height: 200px;
+  float: left; }
