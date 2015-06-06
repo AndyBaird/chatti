@@ -16,13 +16,14 @@ body{
   overflow: auto;
   position: fixed;
   bottom: 0;
-  margin-bottom: 5em;
+  margin-bottom: 4.5em;
   width:100%;
 }
 li {
   padding: 0.5em;
   font-size: 1.5em;
-  margin-bottom:0.5em;
+  margin-top:0.3em;
+  margin-bottom:0.3em;
   margin-right: 0.8em;
   margin-left: 3.2em;
   background: $li-bg-color;

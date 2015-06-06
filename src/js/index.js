@@ -7,7 +7,11 @@ $('.user-form').on('submit', function parseInputs(e){
     console.log(input[0]);
     	if (input[0] == "gh") {
         getGitHub();
-      }else{
+      }
+      if (input[0] == "weather"){
+        getWeather();
+      }
+      if (1 == 1) {
         var ul = document.querySelector('.output-list');
         var li = document.createElement("li");
         var input = $('.user-input').val();
@@ -15,29 +19,11 @@ $('.user-form').on('submit', function parseInputs(e){
           ul.appendChild(li);
           $('.list-user').last().text(input);
           scroll();
-          $('.user-input').val(''); 
-    };
+          $('.user-input').val('');
+        } 
+    
 });
-//function to query GitHub
-function getGitHub (){
-  var input = $('.user-input').val().split(': ');
-  var ghLogin = input[1];
-  console.log(ghLogin);
-    $.getJSON('https://api.github.com/users/' + ghLogin)
-      .done(showUser)
-      .fail(showError);
-  }
-  
-function showUser(user) {
-  show('gh-user-template', user);
-  }
-  
-function showError(req, status, err) {
-  err = err || {};
-  err.message = err.message || status;
-  console.log(err);
-  show('gh-error-template', { message: err });
-  }
+
 //function to append new content to the Ul
 function show(template, model) {
     var fn = _.template($('#' + template).html(), { variable: 'm' });
@@ -52,15 +38,41 @@ function show(template, model) {
       objScroll.scrollTop = objScroll.scrollHeight + targetOffset;
   };
 
-//function getWeather(zipCode) {
-//  $.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial')
-//    .done(function (data) {
-//      console.log(data);
-//    	$('.active-title').html("Current Weather");
-//    	$('.active-content').html("In " + data.name + " it is " + data.main.temp + " degrees outside and the conditions are: "
-//      + data.weather[0].description);
-//  });
-//}  
+//GitHub
+
+function getGitHub (){
+  var input = $('.user-input').val().split(': ');
+  var ghLogin = input[1];
+  console.log(ghLogin);
+    $.getJSON('https://api.github.com/users/' + ghLogin)
+      .done(showUser)
+      .fail(showError);
+  }
   
+function showUser(user) {
+  show('gh-user-template', user);
+  $('.user-input').val(''); 
+  }
+  
+function showError(req, status, err) {
+  err = err || {};
+  err.message = err.message || status;
+  console.log(err);
+  show('gh-error-template', { message: err });
+  }
+
+//Weather
+
+function getWeather() {
+  var input = $('.user-input').val().split(': ');
+  var zipCode = input[1]; 
+  $.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial')
+    .done(showWeather);
+  }
+  
+function showWeather(zipCode) {
+  show('weather-template', zipCode);
+  $('.user-input').val(''); 
+  }
   
 })();
