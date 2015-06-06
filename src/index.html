@@ -14,7 +14,7 @@
       </div>
       <div class="input-container">
         <form class="user-form">
-          <input class="user-input" placeholder="weather: zip">
+          <input class="user-input" placeholder="help: me">
         </form>
       </div>
     </div>  
@@ -56,11 +56,23 @@
           
           <script id="gify-template" type="text/html">
             <li class = "list-gify">
-
-              <img class = "gif-image" src=<%- m.data[_.random(0,25)].images.downsized.url %>
-                
+              <div class ="gif-container">
+                <img class = "gif-image" src=<%- m.data[_.random(0,25)].images.downsized.url %>
+               </div>
+               <div class = "gif-clear"></div>
               </img> 
             </li>
+          </script>
+          
+          <script id="help-template" type="text/html">
+            <div class="help-container">
+              <li class="help-text"> 
+                Ask me stuff with a ":" followed by a space like the examples below: <br><br>
+                weather: "zipcode/city,state" <br>
+                gh: "github profile name"<br>
+                gif: "search keyword"
+              </li>
+            </div>
           </script>
               
       <script src="js/vendor.js"></script>
