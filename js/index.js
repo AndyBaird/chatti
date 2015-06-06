@@ -1,34 +1,48 @@
 (function() {
 
 //master function to listen and parse all inputs
-$('.user-form').on('submit', function parseInputs(e){
-  e.preventDefault();  
+  $('.user-form').on('submit', function parseInputs(e){
+    e.preventDefault();  
     var input = $('.user-input').val().split(': ');
-    console.log(input[0]);
-    	if (input[0] == "gh") {
-        getGitHub();
-      }
+    console.log(input);
+  //    var input = [];
+  //    for (var i = 0; i < inputAll.length; i++) {
+  //      console.log(inputAll[i].val());
+  //      inputAll[i].value.trim().push(input);
+  //
+  //    }
+      
+  	if (input[0] == "gh") {
+      getGitHub();
+    }
       if (input[0] == "weather"){
         getWeather();
       }
-      if (1 == 1) {
-        var ul = document.querySelector('.output-list');
-        var li = document.createElement("li");
-        var input = $('.user-input').val();
-          li.setAttribute('class','list-user');
-          ul.appendChild(li);
-          $('.list-user').last().text(input);
-          scroll();
-          $('.user-input').val('');
-        } 
-    
-});
+        if (input[0] == 'gif'){
+          getGif();
+        }
+          if (input[0] == 'help'){
+            getHelp();
+          }
+            if (1 == 1) {
+              var ul = document.querySelector('.output-list');
+              var li = document.createElement("li");
+              var input = $('.user-input').val();
+                li.setAttribute('class','list-user');
+                ul.appendChild(li);
+                $('.list-user').last().text(input);
+                scroll();
+                $('.user-input').val('');
+              } 
+  });
 
 //function to append new content to the Ul
 function show(template, model) {
     var fn = _.template($('#' + template).html(), { variable: 'm' });
+    console.log(model);
     $('.output-list').append(fn(model));
-    scroll();
+        setTimeout(scroll,400);
+
   } 
 //function to scroll viewport to bottom
   function scroll (){
@@ -40,39 +54,57 @@ function show(template, model) {
 
 //GitHub
 
-function getGitHub (){
-  var input = $('.user-input').val().split(': ');
-  var ghLogin = input[1];
-  console.log(ghLogin);
-    $.getJSON('https://api.github.com/users/' + ghLogin)
-      .done(showUser)
-      .fail(showError);
+  function getGitHub (){
+    var input = $('.user-input').val().split(': ');
+    var ghLogin = input[1];
+    console.log(ghLogin);
+      $.getJSON('https://api.github.com/users/' + ghLogin)
+        .done(showUser)
+        .fail(showError);
   }
   
-function showUser(user) {
-  show('gh-user-template', user);
-  $('.user-input').val(''); 
+  function showUser(user) {
+    show('gh-user-template', user);
+    $('.user-input').val(''); 
   }
   
-function showError(req, status, err) {
-  err = err || {};
-  err.message = err.message || status;
-  console.log(err);
-  show('gh-error-template', { message: err });
+  function showError(req, status, err) {
+    err = err || {};
+    err.message = err.message || status;
+    console.log(err);
+    show('gh-error-template', { message: err });
   }
 
 //Weather
 
-function getWeather() {
-  var input = $('.user-input').val().split(': ');
-  var zipCode = input[1]; 
-  $.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial')
-    .done(showWeather);
+  function getWeather() {
+    var input = $('.user-input').val().split(': ');
+    var location = input[1]; 
+    $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial')
+      .done(showWeather);
+      console.log($.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial'));
   }
   
-function showWeather(zipCode) {
-  show('weather-template', zipCode);
-  $('.user-input').val(''); 
+  function showWeather(location) {
+    show('weather-template', location);
+    $('.user-input').val(''); 
+  }
+
+//Gif Api
+  function getGif() {
+    var input = $('.user-input').val().split(': ');
+    var searchKeyword = input[1]; 
+    $.getJSON('http://api.giphy.com/v1/gifs/search?q=' + searchKeyword + '&api_key=dc6zaTOxFJmzC')
+      .done(showGif);
   }
   
+  function showGif(image) {
+    show('gify-template', image);
+    $('.user-input').val(''); 
+  }
+
+//Help
+  function getHelp(nothing){
+    show('help-template', nothing);
+  }
 })();

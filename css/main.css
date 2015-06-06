@@ -69,13 +69,13 @@ li {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
   margin-right: 0.8em;
-  margin-left: 3.2em;
+  margin-left: 8em;
   background: #E8E8E8;
   border-radius: 0.4em; }
 
 .list-user {
   margin-left: 0.8em;
-  margin-right: 3.2em;
+  margin-right: 8em;
   background: #00A2FF;
   color: white; }
 
@@ -114,3 +114,26 @@ li {
 .gitHub-avatar {
   max-height: 200px;
   float: left; }
+
+.weather-icon-container {
+  float: left; }
+
+.weather-desc {
+  padding-left: 0.2em;
+  text-align: right; }
+
+.weather-icon {
+  vertical-align: middle; }
+
+.gif-container {
+  position: relative;
+  height: 200px; }
+
+.gif-clear {
+  clear: both;
+  display: block; }
+
+.gif-image {
+  position: absolute;
+  right: 0;
+  max-height: 200px; }
