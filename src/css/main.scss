@@ -104,6 +104,7 @@ li {
     .input-container {
       height: 100px;
       padding: 1em;
+      padding-bottom: 1.5em;
     }
     .user-input {
       padding: 0.5em;
@@ -123,10 +124,11 @@ li {
     }
     li {
       margin-left:2.5em;
+      font-size: 2.5em; 
     }
     .list-user {
-      font-size: 3em;
-      margin-right:2.5em; 
+      font-size: 2.5em;
+      margin-right:2em; 
     }
     
 }
