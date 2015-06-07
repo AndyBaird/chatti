@@ -62,7 +62,7 @@ function show(template, model) {
 //GitHub
 
   function getGitHub (){
-    var input = $('.user-input').val().split(': ');
+    var input = $('.user-input').val().split(':');
     var ghLogin = input[1];
     console.log(ghLogin);
       $.getJSON('https://api.github.com/users/' + ghLogin)
@@ -86,7 +86,7 @@ function show(template, model) {
 
   function getWeather() {
     var input = $('.user-input').val().split(': ');
-    var location = input[1]; 
+    var location = input[1].trim(); 
     $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial')
       .done(showWeather);
       console.log($.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + location + ',us&units=imperial'));
