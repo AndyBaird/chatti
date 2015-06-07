@@ -3,7 +3,9 @@
 //master function to listen and parse all inputs
   $('.user-form').on('submit', function parseInputs(e){
     e.preventDefault();  
-    var input = $('.user-input').val().split(': ');
+    var lowerCaseInput = $('.user-input').val().toLowerCase();
+    var input = lowerCaseInput.split(': ');
+    
     console.log(input);
   //    var input = [];
   //    for (var i = 0; i < inputAll.length; i++) {
@@ -27,10 +29,10 @@
             if (1 == 1) {
               var ul = document.querySelector('.output-list');
               var li = document.createElement("li");
-              var input = $('.user-input').val();
+              var OriginalInput = $('.user-input').val();
                 li.setAttribute('class','list-user');
                 ul.appendChild(li);
-                $('.list-user').last().text(input);
+                $('.list-user').last().text(OriginalInput);
                 scroll();
                 $('.user-input').val('');
               } 
@@ -50,6 +52,8 @@ function show(template, model) {
     var targetOffset = objScroll.offsetHeight;
       console.log(targetOffset);
       objScroll.scrollTop = objScroll.scrollHeight + targetOffset;
+//      $("html, body").animate({ scrollTop: 0 }, 600);
+//    return false;
   };
 
 //GitHub

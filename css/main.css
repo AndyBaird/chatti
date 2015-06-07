@@ -137,3 +137,21 @@ li {
   position: absolute;
   right: 0;
   max-height: 200px; }
+
+/* Portrait and Landscape for phones */
+@media only screen and (max-device-width: 667px) {
+  .output-container {
+    font-size: 25px; }
+  .input-container {
+    height: 100px;
+    padding: 1em; }
+  .user-input {
+    padding: 0.5em;
+    font-size: 3em;
+    width: 80%; }
+  .output-list {
+    margin-bottom: 7.5em; }
+  .gif-container {
+    height: 300px; }
+  .gif-image {
+    max-height: 300px; } }
