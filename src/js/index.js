@@ -13,35 +13,38 @@
   //      inputAll[i].value.trim().push(input);
   //
   //    }
-      
-  	if (input[0] == "gh") {
-      getGitHub();
-    }
-      if (input[0] == "weather"){
-        getWeather();
+    if (1 == 1) {
+          var ul = document.querySelector('.output-list');
+          var li = document.createElement("li");
+          var OriginalInput = $('.user-input').val();
+            li.setAttribute('class','list-user');
+            ul.appendChild(li);
+            $('.list-user').last().text(OriginalInput);
+            scroll();
+     } 
+    	if (input[0] == "gh") {
+        getGitHub();
       }
-        if (input[0] == 'gif'){
-          getGif();
+        if (input[0] == "weather"){
+          getWeather();
         }
-          if (input[0] == 'help'){
-            getHelp();
+          if (input[0] == 'gif'){
+            getGif();
           }
-            if (1 == 1) {
-              var ul = document.querySelector('.output-list');
-              var li = document.createElement("li");
-              var OriginalInput = $('.user-input').val();
-                li.setAttribute('class','list-user');
-                ul.appendChild(li);
-                $('.list-user').last().text(OriginalInput);
-                scroll();
-                $('.user-input').val('');
-              } 
+            if (input[0] == 'help'){
+              getHelp();
+            }
+              if (input[0] == 'calc'){
+                getCalc();
+              }
+          $('.user-input').val('');
   });
 
 //function to append new content to the Ul
 function show(template, model) {
     var fn = _.template($('#' + template).html(), { variable: 'm' });
     console.log(model);
+    console.log(fn);
     $('.output-list').append(fn(model));
         setTimeout(scroll,400);
 
@@ -111,4 +114,14 @@ function show(template, model) {
   function getHelp(nothing){
     show('help-template', nothing);
   }
+
+//Calculator
+  function getCalc(){
+    console.log($('.user-input').val());
+    var userInput = $('.user-input').val().split(": "); // get the math part of the input
+    var calcAnswer = eval(userInput[1]);  
+    console.log(calcAnswer);
+    show('calc-template', { result: calcAnswer});
+  }
+  
 })();
