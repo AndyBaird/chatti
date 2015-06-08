@@ -98,6 +98,7 @@ gulp.task('js', ['js:vendor'], function () {
 gulp.task('js:vendor', function () {
   return gulp.src([
     './bower_components/jquery/dist/jquery.min.js',
+    './bower_components/bootstrap/dist/bootstrap.min.js',
     './bower_components/underscore/underscore-min.js'
     ])
     .pipe(concat('vendor.js'))
